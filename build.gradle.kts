@@ -2,6 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     kotlin("jvm")
+    kotlin("plugin.compose")
     id("org.jetbrains.compose")
 }
 
@@ -12,6 +13,14 @@ repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     google()
+    maven {
+        url = uri("https://company/com/maven2")
+    }
+    mavenLocal()
+    flatDir {
+        dirs("libs")
+    }
+    gradlePluginPortal()
 }
 
 dependencies {
@@ -30,6 +39,7 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "Chess"
             packageVersion = "1.0.0"
+            modules("jdk.unsupported")
         }
     }
 }
